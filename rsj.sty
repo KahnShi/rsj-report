@@ -116,7 +116,7 @@
 
 \def\thebibliography#1{% 参考文献出力命令
   \vskip 1zh plus .2ex minus .2ex 
-  \centering{\normalsize\bf 参　考　文　献}\par\@mkboth{References}{References}
+  \centering{\normalsize\bf Reference}\par\@mkboth{References}{References}
 %  \noindent{\normalsize\bf 参　考　文　献}\par\@mkboth{References}{References}
   \list{[\arabic{enumi}]}			% ラベルは [1], [2], ...
     {\settowidth\labelwidth{#1)}		% ラベルの幅は [引数]
@@ -149,12 +149,12 @@
 \def\labfig#1{\label{fig:#1}}
 \def\labtab#1{\label{tab:#1}}
 \def\labeq#1{\label{eq:#1}}
-\def\reffig#1{図\ref{fig:#1}}
-\def\reftab#1{表\ref{tab:#1}}
-\def\refeq#1{式(\ref{eq:#1})}
+\def\reffig#1{Fig.\ref{fig:#1}}
+\def\reftab#1{Tab.\ref{tab:#1}}
+\def\refeq#1{Eq.(\ref{eq:#1})}
 
-\def\fnum@figure{{図}\thefigure}
-\def\fnum@table{{表}\thetable}
+\def\fnum@figure{{Fig.}\thefigure}
+\def\fnum@table{{Tab.}\thetable}
 
 \long\def\@caption#1[#2]#3{\par\addcontentsline{\csname
   ext@#1\endcsname}{#1}{\protect\numberline{\csname 

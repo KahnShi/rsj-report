@@ -329,7 +329,7 @@ $(MAINFILE:.tex=.dvi): .force
 	)
 	$(MUTE)[ -z "$(BBL)" -a -e .valid ] || [ -n "$(BBL)" -a -e .compiled ]
 	$(MUTE)echo "[info] Converting DVI to PDF"
-	$(MUTE)dvipdfmx -o $(MAINFILE:.tex=.pdf) $(MAINFILE:.tex=.dvi) $(VERYSILENT)
+	$(MUTE)dvipdfmx -r 600 -o $(MAINFILE:.tex=.pdf) $(MAINFILE:.tex=.dvi) $(VERYSILENT)
 
 .figs: $(ALLFIGS)
 	$(MUTE)touch .figs
