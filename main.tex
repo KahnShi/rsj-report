@@ -27,7 +27,7 @@ In the following sections, we will design motion planning framework for Hydrus r
 \begin{figure}[htb]
   \centering
   \includegraphics[clip, bb= 10 128 777 457,  width=\columnwidth]{figs_orig/figure.pdf}
-  \caption{TODOTODO}
+  \caption{Left is the basic structure of 4-links Hydrus robot, which has 4 rotors and 3 motor-driven joint links. Right is Hydrus robot with tennis racket.}
   \label{fig:abst-image}
 \end{figure}
 
@@ -110,15 +110,6 @@ The motion primitive in each axis follows:
 \end{equation}
 
 \begin{equation}
-  \label{eq:temp2-0}
-  \bm{f}(t) = \left[ \begin{array}{c}
-      \bm{a}t^5 + \bm{b}t^4 + \bm{c}t^3 + \bm{d}t^2 + \bm{e}t + \bm{f} \\
-      5\bm{a}t^4 + 4\bm{b}t^3 + 3\bm{c}t^2 + 2\bm{d}t + \bm{e} \\
-      20\bm{a}t^4 + 12\bm{b}t^2 + 6\bm{c}t + 2\bm{d}
-  \end{array}\right]
-\end{equation}
-
-\begin{equation}
   \label{eq:temp2}
   \bm{f}(t) = \begin{bmatrix}
       \bm{a} & \bm{b} & \bm{c} & \bm{d} & \bm{e} & \bm{f} \\
@@ -139,7 +130,7 @@ The motion primitive in each axis follows:
 
 For any random start point, we could acquire its position, velocity and acceleration from robot inertial data. The end point would be the hitting point, and its position, velocity and acceleration could be sampled in the work space. Considering a simple situation, we assume tennis ball is fixed, so only velocity and acceleration are needed to be sampled. For traverse time, we use traverse trajectory distance and average traverse speed to get the traverse time.
 
-To get the faster swing speed, motion primitive for swing joint is also generated\reffig{motion}. The joint, which has the racket attached, will backswing in advance, and then swing to guarantee racket will have velocity when being in collision with tennis ball. The backswing and swing time is decided by the selected trajectory of the robot.
+To get the faster swing speed, motion primitive for swing joint is also generated(\reffig{primitive-image}). The racket attached joint will backswing in advance, and then swing to guarantee racket will have velocity when being in collision with tennis ball. The backswing and swing time is decided by the selected trajectory of the robot.
 
 \subsection{Trajectory Selection}
 Considering the dynamic feasibility of the robot, the maximum velocity and acceleration have to be guaranteed. So the selector is as:
@@ -164,6 +155,13 @@ If there are other obstacles except for the ground in the environment, collision
   C_{obstacle}\bigcap (f_x(t), f_y(t), f_z(t)) =\emptyset
 \end{equation}
 
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[clip, bb= 61 16 770 488,  width=\columnwidth]{figs_orig/primitive.pdf}
+  \caption{(1)-(6) is the swing motion based on motion primitive, green lines are primitive candidates, red line is the selected candidate, yellow ball is the hitting target. (1) is the start point, (2) begins to do backswing, (3) finishes backswing, (4) starts swing motion, (5) gets close to target and continue swing motion, (6) hits the target ball.\newline (7)-(9) is the attitude control after hitting motion, robot recovers to be still and specific height. }
+  \label{fig:primitive-image}
+\end{figure}
 
 \section{Simulation Result}
 We implement this method into Gazebo simulation and nearly 5, 000 motion primitives could be generated in 100ms, and feasible trajectory could be easily found inside these candidates \reffig{primitives}. Then we build position and velocity control loop to guarantee the robot could follow the feasible trajectory.
