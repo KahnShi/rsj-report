@@ -49,31 +49,30 @@ The dynamics of the translational motion and rotation motion can be described as
       \end{array}\right]
 \end{equation}
 
-\begin{equation}
-  \begin{aligned}
-    \label{eq:model2}
-    I_{multilink} \left[ \begin{array}{c}
-        \dot{w} _x \\
-        \dot{w} _y \\
-        \dot{w} _z
-      \end{array}\right]
-    = \left[ \begin{array}{c}
-        \sum_{i=1}^{N} y_i F_i \\
-        -\sum_{i=1}^{N} x_i F_i \\
-        \sum_{i=1}^{N} T_i
-      \end{array}\right]
-    - \left[ \begin{array}{c}
-        w_x \\
-        w_y \\
-        w_z
-      \end{array}\right]
-    \times I_{multilink} \left[ \begin{array}{c}
-        w_x \\
-        w_y \\
-        w_z
-      \end{array}\right]
-  \end{aligned}
-\end{equation}
+\begin{eqnarray}
+  \label{eq:model2-0}
+  & I_{multilink} \left[ \begin{array}{c}
+      \dot{w} _x \\
+      \dot{w} _y \\
+      \dot{w} _z
+    \end{array}\right]
+  = \left[ \begin{array}{c}
+      \sum_{i=1}^{N} y_i F_i \\
+      -\sum_{i=1}^{N} x_i F_i \\
+      \sum_{i=1}^{N} T_i
+    \end{array}\right] \nonumber \\
+  \label{eq:model2}
+  & - \left[ \begin{array}{c}
+      w_x \\
+      w_y \\
+      w_z
+    \end{array}\right]
+  \times I_{multilink} \left[ \begin{array}{c}
+      w_x \\
+      w_y \\
+      w_z
+    \end{array}\right]
+\end{eqnarray}
 
 %% \begin{equation}
 %%   \label{eq:model2}
