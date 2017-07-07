@@ -5,6 +5,7 @@
 \usepackage{bm}
 \usepackage{amsmath}
 \usepackage{amssymb}
+\newcommand*{\Scale}[2][4]{\scalebox{#1}{$#2$}}%
 
 \begin{document}
 \title{Motion Primitive with Aerial Manipulator for Dynamic Tennis Swing Motion}
@@ -19,7 +20,7 @@
 
 In this paper, we implement a rapid real-time motion planning algorithm with a novel type of aerial manipulator, and dynamic tennis swing motion is achieved as an example to show the feasibility of the algorithm. When planning the feasible trajectory, dynamic constraints of the robot, and position, velocity and acceleration in start and end points are considered. Thousands of motion primitives are generated online and the least-cost trajectory to follow is selected by trajectory selector.
 
-Recently, aerial robots raise increasing attentions and lots of fundamental researches appear in geometric control, 3D mapping,  and real-time planning. With the help of these fundamental researches, aerial robots shows great potential to interact with environments and take more complex tasks such as multi-field drone, moving collaborate object. Among them, aerial manipulator is the most exciting and difficult one since it directly interact with the environments. Several researches of aerial manipulators are shown, some work attaches a high-DOFs robot arm to the downward base of the drone and more consideration in stability and workspace is needed\cite{aerial_manipulator_1}, some are a simple 1-DOF gripper with limited functions\cite{aerial_manipulator_2}. Hence, our lab come up with a transformable drone (Hydrus \reffig{abst-image}) as the aerial manipulator with dual arms, which have lots of potentials like moving in clustered environments and moving heavy objects\cite{zhao_ar}.
+Recently, aerial robots raise increasing attentions and lots of fundamental researches appear in geometric control, 3D mapping,  and real-time planning. With the help of these fundamental researches, aerial robots shows great potential to interact with environments and take more complex tasks such as multi-field drone, moving collaborate object. Among them, aerial manipulator is the most exciting and difficult one since it directly interact with the environments. Several researches of aerial manipulators are shown, some work attaches a high-DOFs robot arm to the downward base of the drone and more consideration in stability and workspace is needed\cite{aerial_manipulator_1}, some are a simple 1-DOF gripper with limited functions\cite{aerial_manipulator_2}. Hence, our lab come up with a transformable drone (Hydrus \reffig{abst-image}) as the aerial manipulator with dual arms, which have lots of potentials like moving in clustered environments and moving heavy objects\cite{zhao_ar}\cite{zhao_iser}.
 
 In the following sections, we will design motion planning framework for Hydrus robot and use experiment result to verify the feasibility.
 
@@ -37,40 +38,40 @@ Geometric control researches showed the differential flatness of quadrotor  syst
 The dynamics of the translational motion and rotation motion can be described as follows:
 \begin{equation}
   \label{eq:model1}
-  M\bm{\ddot{r}}_{CoG} =\left[ \begin{array}{c}
+  M^{\scalebox{.5}{$\{W\}$}}\bm{\ddot{r}}_{CoG} =\left[ \begin{array}{c}
       0 \\
       0 \\
-      -Mg
+      -M^{\scalebox{.5}{$\{w\}$}}g
     \end{array}\right]
-    + R \left[ \begin{array}{c}
+  + {}^{\scalebox{.5}{$\{W\}$}}R \left[ \begin{array}{c}
         0 \\
         0 \\
-        \sum_{i=1}^{N} F_i
+        \sum_{i=1}^{N} {}^{\scalebox{.5}{$\{CoG\}$}}F_i
       \end{array}\right]
 \end{equation}
 
 \begin{eqnarray}
   \label{eq:model2-0}
-  & I_{multilink} \left[ \begin{array}{c}
-      \dot{w} _x \\
-      \dot{w} _y \\
-      \dot{w} _z
+  & {}^{\scalebox{.5}{$\{CoG\}$}}I_{multilink} \left[ \begin{array}{c}
+      {}^{\scalebox{.5}{$\{CoG\}$}}\dot{w} _x \\
+      {}^{\scalebox{.5}{$\{CoG\}$}}\dot{w} _y \\
+      {}^{\scalebox{.5}{$\{CoG\}$}}\dot{w} _z
     \end{array}\right]
   = \left[ \begin{array}{c}
-      \sum_{i=1}^{N} y_i F_i \\
-      -\sum_{i=1}^{N} x_i F_i \\
-      \sum_{i=1}^{N} T_i
+      \sum_{i=1}^{N} {}^{\scalebox{.5}{$\{CoG\}$}}y_i {}^{\scalebox{.5}{$\{CoG\}$}}F_i \\
+      -\sum_{i=1}^{N} {}^{\scalebox{.5}{$\{CoG\}$}}x_i {}^{\scalebox{.5}{$\{CoG\}$}}F_i \\
+      \sum_{i=1}^{N} {}^{\scalebox{.5}{$\{CoG\}$}}T_i
     \end{array}\right] \nonumber \\
   \label{eq:model2}
   & - \left[ \begin{array}{c}
-      w_x \\
-      w_y \\
-      w_z
+      {}^{\scalebox{.5}{$\{CoG\}$}}w_x \\
+      {}^{\scalebox{.5}{$\{CoG\}$}}w_y \\
+      {}^{\scalebox{.5}{$\{CoG\}$}}w_z
     \end{array}\right]
-  \times I_{multilink} \left[ \begin{array}{c}
-      w_x \\
-      w_y \\
-      w_z
+  \times {}^{\scalebox{.5}{$\{CoG\}$}}I_{multilink} \left[ \begin{array}{c}
+      {}^{\scalebox{.5}{$\{CoG\}$}}w_x \\
+      {}^{\scalebox{.5}{$\{CoG\}$}}w_y \\
+      {}^{\scalebox{.5}{$\{CoG\}$}}w_z
     \end{array}\right]
 \end{eqnarray}
 
