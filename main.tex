@@ -136,13 +136,13 @@ Considering the dynamic feasibility of the robot, the maximum velocity and accel
 
 \begin{eqnarray}
   \label{eq:temp3}
- & min{\int_0^T |f^{(3)}_x(t) + f^{(3)}_y(t) + f^{(3)}_z(t)|^2 dt}   \\
+ & min{\int_0^T |x^{(3)}_x(t) + x^{(3)}_y(t) + x^{(3)}_z(t)|^2 dt}   \\
   \label{eq:temp4}
-s.t. &  V_{i_{min}} < f^{(1)}_i(t) < V_{i_{max}}, i = x, y, z \nonumber \\
+s.t. &  V_{i_{min}} < x^{(1)}_i(t) < V_{i_{max}}, i = x, y, z \nonumber \\
   \label{eq:temp5}
- & a_{i_{min}} < f^{(2)}_i(t) < a_{i_{max}}, i = x, y, z \nonumber \\
+ & a_{i_{min}} < x^{(2)}_i(t) < a_{i_{max}}, i = x, y, z \nonumber \\
   \label{eq:temp6}
- & 0 < f_z(t) \nonumber
+ & 0 < x_z(t) \nonumber
 \end{eqnarray}
 
 Objective function is showed as \refeq{temp3}, the calculus of the jerk’s absolute value from start time to end time is calculated. The following constraints guarantee the dynamic constraints of robot and robot not crashing into the ground.
@@ -151,7 +151,7 @@ If there are other obstacles except for the ground in the environment, collision
 
 \begin{equation}
   \label{eq:temp7}
-  C_{obstacle}\bigcap (f_x(t), f_y(t), f_z(t)) =\emptyset
+  C_{obstacle}\bigcap (x_x(t), x_y(t), x_z(t)) =\emptyset
 \end{equation}
 
 
@@ -163,7 +163,7 @@ If there are other obstacles except for the ground in the environment, collision
 \end{figure}
 
 \section{Simulation Result}
-We implement this method into Gazebo simulation and nearly 5, 000 motion primitives could be generated in 100ms, and feasible trajectory could be easily found inside these candidates \reffig{primitives}. Then we build position and velocity control loop to guarantee the robot could follow the feasible trajectory.
+We implement this method into Gazebo simulation and nearly 5, 000 motion primitives could be generated in 100ms, and feasible trajectory could be easily found inside these candidates \reffig{primitive-image}. Then we build position and velocity control loop to guarantee the robot could follow the feasible trajectory.
 
 \section{Conclusion}
 This paper showed a rapid motion planning algorithm for Hydrus robot, and implement tennis swing task as the example to show the feasibility of the method. Experiment is implemented in simulation and the whole system is evaluated.
