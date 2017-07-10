@@ -34,7 +34,7 @@ In the following sections, we will design motion planning framework for Hydrus r
 \section{Dynamic Tennis Swing Motion}
 
 \subsection{Model}
-Geometric control researches showed the differential flatness of quadrotor  system[1], which means that the output of 4 rotors rotation speed could be calculated based on the given input $[x, y, z, ψ]$, here $x$, $y$, $z$, $ψ$ is the function $x(t)$, $y(t)$, $z(t)$, $ψ(t)$  representing the position of robot in $x$, $y$, $z$ axis and yaw angle at time $t$.
+Geometric control researches showed the differential flatness of quadrotor  system[1], which means that the output of 4 rotors rotation speed could be calculated based on the given input $[s_x, s_y, s_z, ψ]$, here $s_x$, $s_y$, $s_z$, $s_ψ$ is the function $s_x(t)$, $s_y(t)$, $s_z(t)$, $ψ(t)$  representing the position of robot in $x$, $y$, $z$ axis and yaw angle at time $t$.
 The dynamics of the translational motion and rotation motion can be described as follows:
 \begin{equation}
   \label{eq:model1}
@@ -103,7 +103,7 @@ The motion primitive in each axis follows:
 \begin{equation}
   \label{eq:temp}
   \bm{f}(t) = \left[ \begin{array}{c}
-      \bm{x}(t) \\
+      \bm{s}(t) \\
       \bm{v}(t) \\
       \bm{a}(t)
     \end{array}\right]
@@ -136,13 +136,13 @@ Considering the dynamic feasibility of the robot, the maximum velocity and accel
 
 \begin{eqnarray}
   \label{eq:temp3}
- & min{\int_0^T |x^{(3)}_x(t) + x^{(3)}_y(t) + x^{(3)}_z(t)|^2 dt}   \\
+ & min{\int_0^T |s^{(3)}_x(t) + s^{(3)}_y(t) + s^{(3)}_z(t)|^2 dt}   \\
   \label{eq:temp4}
-s.t. &  V_{i_{min}} < x^{(1)}_i(t) < V_{i_{max}}, i = x, y, z \nonumber \\
+s.t. &  V_{i_{min}} < s^{(1)}_i(t) < V_{i_{max}}, i = x, y, z \nonumber \\
   \label{eq:temp5}
- & a_{i_{min}} < x^{(2)}_i(t) < a_{i_{max}}, i = x, y, z \nonumber \\
+ & a_{i_{min}} < s^{(2)}_i(t) < a_{i_{max}}, i = x, y, z \nonumber \\
   \label{eq:temp6}
- & 0 < x_z(t) \nonumber
+ & 0 < s_z(t) \nonumber
 \end{eqnarray}
 
 Objective function is showed as \refeq{temp3}, the calculus of the jerk’s absolute value from start time to end time is calculated. The following constraints guarantee the dynamic constraints of robot and robot not crashing into the ground.
@@ -151,7 +151,7 @@ If there are other obstacles except for the ground in the environment, collision
 
 \begin{equation}
   \label{eq:temp7}
-  C_{obstacle}\bigcap (x_x(t), x_y(t), x_z(t)) =\emptyset
+  C_{obstacle}\bigcap (s_x(t), s_y(t), s_z(t)) =\emptyset
 \end{equation}
 
 
